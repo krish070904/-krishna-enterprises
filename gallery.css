@@ -1,0 +1,185 @@
+  /* ===================== CAROUSEL SECTION ===================== */
+  .carousel-section {
+    background-color: #f9f9f9;
+    padding-bottom: 2rem;
+  }
+  .carousel-title {
+    margin: 2rem 2rem 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    letter-spacing: 0.5px;
+  }
+  #carouselWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    transition: opacity 0.5s; /* for fade in/out on reorder */
+  }
+
+  .gallery-container {
+    overflow: hidden;
+    width: 100%;
+    background-color: #fff;
+    padding: 20px 0;
+    margin: 0 auto 1rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    position: relative;
+  }
+  /* Infinite scroll for 8 items: 400×300 each + 20px margin. 
+     4 items + 4 duplicates => width: calc(2 * (400px * 4 + 20px * 3)). */
+  .gallery {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    animation: scrollGallery 18s linear infinite;
+    width: calc(2 * (400px * 4 + 20px * 3));
+  }
+  .gallery:hover {
+    animation-play-state: paused;
+  }
+  .gallery-item {
+    position: relative;
+    margin-right: 20px;
+    width: 400px;
+    height: 300px;
+    flex-shrink: 0;
+    background-color: #ccc;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .gallery-item:hover {
+    transform: scale(1.02);
+  }
+  @keyframes scrollGallery {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .carousel-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 600;
+    z-index: 2;
+  }
+  .gallery-container:hover .carousel-overlay {
+    opacity: 1;
+  }
+
+  /* Shrink to 210×150 for screens ≤ 992px, but keep infinite scroll */
+  @media (max-width: 992px) {
+    .gallery {
+      width: calc(2 * (210px * 4 + 20px * 3));
+    }
+    .gallery-item {
+      width: 210px;
+      height: 150px;
+    }
+  }
+
+  /* ===================== MODAL ===================== */
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    width: 90%;
+    max-width: 1200px;
+    position: relative;
+    animation: fadeInUp 0.5s ease forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+    margin: 20px;
+  }
+  .modal-image {
+    max-width: 100%;
+    max-height: 70vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  .modal-description {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #333;
+    text-align: center;
+    background-color: #f5f5f5;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s;
+    z-index: 10000;
+    background: rgba(255, 255, 255, 0.9);
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  .close:hover {
+    color: #4CAF50;
+    background: #fff;
+    transform: scale(1.1);
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Utility Classes */
+  .modal * {
+    box-sizing: border-box;
+  }
+
+  /* Prevent body scroll when modal is open */
+  body.modal-open {
+    overflow: hidden;
+  }
