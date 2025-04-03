@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Sitemap: https://krishnaenterprises.com/sitemap.xml
+
+# Disallow admin and private directories
+Disallow: /admin/
+Disallow: /private/
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /logs/ 
